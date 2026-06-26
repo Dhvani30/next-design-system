@@ -27,24 +27,24 @@ function FeaturesSectionComponent() {
       id="features"
       ref={containerRef}
       aria-labelledby="features-heading"
-      className="w-full py-20"
+      className="w-full py-24 bg-oceanic" // Added bg-oceanic to match the dark theme palette
     >
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <ScrollReveal>
           <h2 
             id="features-heading" 
-            className="font-jetbrains text-3xl md:text-5xl text-arctic mb-4"
+            className="font-jetbrains text-3xl md:text-5xl text-arctic mb-4 tracking-tight"
           >
             Platform features
           </h2>
-          <p className="mt-2 max-w-xl text-mint text-lg">
+          <p className="mt-2 max-w-xl text-mint text-lg leading-relaxed">
             Everything included across plans, built for integration, automation,
             and analytics.
           </p>
         </ScrollReveal>
 
-        {/* Bento Grid Layout: 1 col mobile, 2 cols desktop */}
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* BENTO GRID: items-stretch forces all cards in a row to have equal height */}
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
           {FEATURES_BENTO.map((feature, index) => {
             // BENTO LOGIC: 
             // Index 0 (Automation) and Index 3 (Security) span 2 columns on desktop
@@ -55,9 +55,10 @@ function FeaturesSectionComponent() {
             return (
               <div 
                 key={feature.id} 
-                className={gridSpanClass}
+                className={`${gridSpanClass} h-full`} // h-full ensures the grid cell stretches
               >
-                <ScrollReveal delay={index * 100}>
+                {/* We pass className="h-full" to ScrollReveal so it doesn't break the height chain */}
+                <ScrollReveal delay={index * 100} className="h-full">
                   <FeatureBentoCard
                     feature={feature}
                     index={index}

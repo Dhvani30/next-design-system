@@ -109,7 +109,7 @@ function FeatureBentoCardComponent({
     return (
       <article
         id={anchorId}
-        className={`feature-bento-card overflow-hidden ${feature.gridClass}`}
+        className={`feature-bento-card overflow-hidden h-full ${feature.gridClass}`}
       >
         <button
           type="button"
@@ -158,7 +158,7 @@ function FeatureBentoCardComponent({
   return (
     <article
       id={anchorId}
-      className={`feature-bento-card relative overflow-hidden ${feature.gridClass}`}
+      className={`feature-bento-card relative overflow-hidden h-full flex flex-col ${feature.gridClass}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onFocus={handleFocus}
@@ -167,10 +167,10 @@ function FeatureBentoCardComponent({
       <FeatureCardBackground image={feature.image} />
 
       <div
-        className={`relative z-10 ${
+        className={`relative z-10 flex-1 flex flex-col ${
           isLarge
-            ? "flex flex-col gap-6 p-6 md:flex-row md:items-center md:justify-between md:p-8"
-            : "min-h-[220px] p-6 md:p-8"
+            ? "gap-6 p-6 md:flex-row md:items-center md:justify-between md:p-8"
+            : "min-h-[220px] p-6 md:p-8 justify-between"
         }`}
       >
         <div className={isLarge ? "max-w-xl flex-1" : "relative z-10 max-w-[75%]"}>

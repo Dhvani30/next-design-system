@@ -1,6 +1,6 @@
 "use client";
 
-import { memo, useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { MOBILE_BREAKPOINT } from "@/lib/features/config";
 
 export function useFeaturesLayout(containerRef: React.RefObject<HTMLElement | null>) {

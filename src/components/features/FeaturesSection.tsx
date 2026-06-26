@@ -23,14 +23,15 @@ function FeaturesSectionComponent() {
 
   return (
     <section
+      id="features"
       ref={containerRef}
       aria-labelledby="features-heading"
       className="w-full"
     >
-      <h2 id="features-heading">Features</h2>
+      <h2 id="features-heading">Platform features</h2>
       <p className="mt-2 max-w-xl text-mint">
-        A bento grid on desktop that collapses into an accordion on mobile —
-        with context preserved when you resize.
+        Everything included across plans, built for integration, automation,
+        and analytics.
       </p>
 
       <div className="features-bento-grid mt-8">

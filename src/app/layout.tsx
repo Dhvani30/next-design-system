@@ -15,8 +15,9 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Design System",
-  description: "Global design system with Oceanic Noir theme",
+  title: "DataStream — Automate Your Data Pipeline",
+  description:
+    "Seamlessly integrate, process, and validate data with zero manual intervention.",
 };
 
 export default function RootLayout({

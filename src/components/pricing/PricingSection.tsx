@@ -24,7 +24,7 @@ function PricingSectionComponent() {
   );
 
   return (
-    <section aria-labelledby="pricing-heading">
+    <section id="pricing" aria-labelledby="pricing-heading">
       <h2 id="pricing-heading">Pricing</h2>
       <p className="mt-2 max-w-xl">
         Choose a plan in your preferred currency. Annual billing saves 20%.

@@ -9,9 +9,11 @@ export type FeatureBentoItem = {
   title: string;
   description: string;
   icon: FeatureIcon;
-  /** Grid placement on desktop (2-column bento). */
+  image: string;
   gridClass: string;
 };
+
+export const MOBILE_BREAKPOINT = 768;
 
 export const FEATURES_BENTO: readonly FeatureBentoItem[] = [
   {
@@ -20,6 +22,7 @@ export const FEATURES_BENTO: readonly FeatureBentoItem[] = [
     description:
       "Orchestrate complex workflows with rule-based triggers, scheduled jobs, and smart defaults that adapt to your team's patterns.",
     icon: "cog-8-tooth",
+    image: "/images/feature-automation.webp",
     gridClass: "md:col-span-2",
   },
   {
@@ -28,6 +31,7 @@ export const FEATURES_BENTO: readonly FeatureBentoItem[] = [
     description:
       "Connect APIs, webhooks, and third-party tools in minutes with pre-built connectors and a unified event bus.",
     icon: "link-solid",
+    image: "/images/feature-integration.webp",
     gridClass: "",
   },
   {
@@ -36,6 +40,7 @@ export const FEATURES_BENTO: readonly FeatureBentoItem[] = [
     description:
       "Monitor KPIs live with interactive dashboards, custom reports, and anomaly detection across every workspace.",
     icon: "chart-pie",
+    image: "/images/feature-analytics.webp",
     gridClass: "",
   },
   {
@@ -44,8 +49,7 @@ export const FEATURES_BENTO: readonly FeatureBentoItem[] = [
     description:
       "Protect data with end-to-end encryption, role-based access controls, audit logs, and SOC 2 compliant infrastructure.",
     icon: "arrow-path",
+    image: "/images/feature-security.webp",
     gridClass: "md:col-span-2",
   },
 ] as const;
-
-export const MOBILE_BREAKPOINT = 768;

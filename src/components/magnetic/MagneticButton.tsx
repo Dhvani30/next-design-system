@@ -15,53 +15,65 @@ export function MagneticButton({
   onClick,
   href,
 }: MagneticButtonProps) {
-  const buttonRef = useRef<HTMLButtonElement | HTMLAnchorElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const anchorRef = useRef<HTMLAnchorElement>(null);
 
   useEffect(() => {
-    const button = buttonRef.current;
-    if (!button) return;
+    const element = href ? anchorRef.current : buttonRef.current;
+    if (!element) return;
 
     const isTouchDevice =
       "ontouchstart" in window || navigator.maxTouchPoints > 0;
 
     if (isTouchDevice) return;
 
-    const handleMouseMove = (e: MouseEvent) => {
-      const rect = button.getBoundingClientRect();
-      const x = e.clientX - rect.left - rect.width / 2;
-      const y = e.clientY - rect.top - rect.height / 2;
+    const handleMouseMove = (e: Event) => {
+      const mouseEvent = e as MouseEvent;
+      const rect = element.getBoundingClientRect();
+      const x = mouseEvent.clientX - rect.left - rect.width / 2;
+      const y = mouseEvent.clientY - rect.top - rect.height / 2;
 
       // Max movement 10px
       const maxMove = 10;
       const moveX = Math.max(-maxMove, Math.min(maxMove, x * 0.3));
       const moveY = Math.max(-maxMove, Math.min(maxMove, y * 0.3));
 
-      button.style.transform = `translate(${moveX}px, ${moveY}px)`;
+      element.style.transform = `translate(${moveX}px, ${moveY}px)`;
     };
 
     const handleMouseLeave = () => {
-      button.style.transform = "translate(0, 0)";
+      element.style.transform = "translate(0, 0)";
     };
 
-    button.addEventListener("mousemove", handleMouseMove);
-    button.addEventListener("mouseleave", handleMouseLeave);
+    element.addEventListener("mousemove", handleMouseMove);
+    element.addEventListener("mouseleave", handleMouseLeave);
 
     return () => {
-      button.removeEventListener("mousemove", handleMouseMove);
-      button.removeEventListener("mouseleave", handleMouseLeave);
+      element.removeEventListener("mousemove", handleMouseMove);
+      element.removeEventListener("mouseleave", handleMouseLeave);
     };
-  }, []);
+  }, [href]);
 
-  const Tag = href ? "a" : "button";
+  if (href) {
+    return (
+      <a
+        ref={anchorRef}
+        href={href}
+        onClick={onClick}
+        className={`magnetic-button transition-transform duration-150 ease-out ${className}`}
+      >
+        {children}
+      </a>
+    );
+  }
 
   return (
-    <Tag
-      ref={buttonRef as any}
-      href={href}
+    <button
+      ref={buttonRef}
       onClick={onClick}
       className={`magnetic-button transition-transform duration-150 ease-out ${className}`}
     >
       {children}
-    </Tag>
+    </button>
   );
 }

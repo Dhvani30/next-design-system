@@ -1,7 +1,7 @@
 "use client";
 
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { lazy, Suspense, useMemo, useRef, useState } from "react";
+import { lazy, Suspense, useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
 
 const NOCTURNAL = "#ffc801";
@@ -11,7 +11,7 @@ const PARTICLE_COUNT = 75;
 function ParticleSystem() {
   const { mouse } = useThree();
   const particlesRef = useRef<THREE.Points>(null);
-  const originalPositions = useRef<Float32Array>();
+  const originalPositions = useRef<Float32Array | null>(null);
 
   const [positions] = useState(() => {
     const pos = new Float32Array(PARTICLE_COUNT * 3);
@@ -20,14 +20,20 @@ function ParticleSystem() {
       pos[i + 1] = (Math.random() - 0.5) * 8;
       pos[i + 2] = (Math.random() - 0.5) * 4;
     }
-    originalPositions.current = new Float32Array(pos);
     return pos;
   });
+
+  // Store original positions after first render
+  useEffect(() => {
+    if (!originalPositions.current) {
+      originalPositions.current = new Float32Array(positions);
+    }
+  }, [positions]);
 
   useFrame((state) => {
     if (!particlesRef.current || !originalPositions.current) return;
 
-    const positions = particlesRef.current.geometry.attributes.position
+    const currentPositions = particlesRef.current.geometry.attributes.position
       .array as Float32Array;
     const time = state.clock.getElapsedTime();
 
@@ -38,21 +44,21 @@ function ParticleSystem() {
       const originalZ = originalPositions.current[i3 + 2];
 
       // Floating animation
-      positions[i3] = originalX + Math.sin(time * 0.5 + i) * 0.3;
-      positions[i3 + 1] = originalY + Math.cos(time * 0.4 + i * 0.5) * 0.3;
-      positions[i3 + 2] = originalZ + Math.sin(time * 0.3 + i * 0.3) * 0.2;
+      currentPositions[i3] = originalX + Math.sin(time * 0.5 + i) * 0.3;
+      currentPositions[i3 + 1] = originalY + Math.cos(time * 0.4 + i * 0.5) * 0.3;
+      currentPositions[i3 + 2] = originalZ + Math.sin(time * 0.3 + i * 0.3) * 0.2;
 
       // Mouse interaction - particles move away from cursor
       const mouseX = mouse.x * 4;
       const mouseY = mouse.y * 4;
-      const dx = positions[i3] - mouseX;
-      const dy = positions[i3 + 1] - mouseY;
+      const dx = currentPositions[i3] - mouseX;
+      const dy = currentPositions[i3 + 1] - mouseY;
       const dist = Math.sqrt(dx * dx + dy * dy);
 
       if (dist < 2) {
         const force = (2 - dist) * 0.3;
-        positions[i3] += (dx / dist) * force;
-        positions[i3 + 1] += (dy / dist) * force;
+        currentPositions[i3] += (dx / dist) * force;
+        currentPositions[i3 + 1] += (dy / dist) * force;
       }
     }
 
@@ -65,14 +71,12 @@ function ParticleSystem() {
     }
   });
 
-  return (
+    return (
     <points ref={particlesRef}>
       <bufferGeometry>
         <bufferAttribute
           attach="attributes-position"
-          count={PARTICLE_COUNT}
-          array={positions}
-          itemSize={3}
+          args={[positions, 3]}
         />
       </bufferGeometry>
       <pointsMaterial

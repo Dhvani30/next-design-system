@@ -12,6 +12,7 @@ import {
   type Tier,
 } from "@/lib/pricing/config";
 import { ConnectedPriceDisplay } from "./ConnectedPriceDisplay";
+import { MagneticButton } from "@/components/magnetic/MagneticButton";
 
 type PricingCardProps = {
   tier: Tier;
@@ -74,8 +75,7 @@ function PricingCardComponent({ tier }: PricingCardProps) {
         })}
       </ul>
 
-      <button
-        type="button"
+      <MagneticButton
         className={`mt-8 rounded-md px-4 py-2.5 text-sm font-medium transition-colors duration-150 ease-out ${
           isPro
             ? "bg-nocturnal text-oceanic hover:bg-saffron"
@@ -83,7 +83,7 @@ function PricingCardComponent({ tier }: PricingCardProps) {
         }`}
       >
         {tier === "enterprise" ? "Contact sales" : "Get started"}
-      </button>
+      </MagneticButton>
     </article>
   );
 }

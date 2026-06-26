@@ -28,23 +28,28 @@ function PricingControlsComponent({
     [onCurrencyChange],
   );
 
-  const handleMonthlyClick = useCallback(() => {
-    onBillingChange("monthly");
-  }, [onBillingChange]);
-
-  const handleAnnualClick = useCallback(() => {
-    onBillingChange("annual");
-  }, [onBillingChange]);
+  const handleBillingClick = useCallback(
+    (cycle: BillingCycle) => {
+      onBillingChange(cycle);
+    },
+    [onBillingChange],
+  );
 
   return (
     <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-      <div className="flex items-center gap-2">
-        <label htmlFor="pricing-currency">Currency</label>
+      {/* Currency Selector */}
+      <div className="flex items-center gap-3">
+        <label
+          htmlFor="pricing-currency"
+          className="text-sm font-medium text-arctic"
+        >
+          Currency
+        </label>
         <select
           id="pricing-currency"
           value={currency}
           onChange={handleCurrencyChange}
-          className="min-w-[6rem] transition-colors duration-150 ease-out"
+          className="rounded-lg border border-expedition bg-oceanic px-4 py-2 text-sm text-arctic transition-colors duration-150 ease-out hover:border-nocturnal focus:border-nocturnal focus:outline-none"
         >
           {CURRENCIES.map((code) => (
             <option key={code} value={code}>
@@ -54,34 +59,29 @@ function PricingControlsComponent({
         </select>
       </div>
 
+      {/* Billing Cycle Toggle */}
       <div
-        className="relative inline-flex rounded-full border border-expedition p-1"
+        className="inline-flex rounded-full border border-expedition bg-oceanic/50 p-1"
         role="group"
         aria-label="Billing cycle"
       >
-        <div
-          className={`absolute top-1 bottom-1 w-[calc(50%-4px)] rounded-full bg-nocturnal transition-all duration-300 ease-out ${
-            billingCycle === "monthly" ? "left-1" : "left-[calc(50%+2px)]"
-          }`}
-        />
         {BILLING_CYCLES.map((cycle) => {
           const isActive = billingCycle === cycle;
-          const label = cycle === "monthly" ? "Monthly" : "Annual";
-          const onClick =
-            cycle === "monthly" ? handleMonthlyClick : handleAnnualClick;
+          const label = cycle === "monthly" ? "Monthly" : "Annual (−20%)";
 
           return (
             <button
               key={cycle}
               type="button"
               aria-pressed={isActive}
-              onClick={onClick}
-              className={`relative z-10 rounded-full px-4 py-2 text-sm font-medium transition-colors duration-300 ease-out ${
-                isActive ? "text-oceanic" : "text-mint hover:text-foreground"
+              onClick={() => handleBillingClick(cycle)}
+              className={`relative rounded-full px-5 py-2 text-sm font-medium transition-all duration-200 ease-out ${
+                isActive
+                  ? "bg-nocturnal text-oceanic shadow-lg shadow-nocturnal/20"
+                  : "text-mint hover:text-arctic"
               }`}
             >
               {label}
-              {cycle === "annual" ? " (−20%)" : ""}
             </button>
           );
         })}

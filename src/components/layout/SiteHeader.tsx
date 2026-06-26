@@ -1,4 +1,5 @@
 import { BRAND_NAME, NAV_LINKS } from "@/lib/site/config";
+import { MagneticButton } from "@/components/magnetic/MagneticButton";
 
 export function SiteHeader() {
   return (
@@ -23,19 +24,19 @@ export function SiteHeader() {
               <li key={link.href}>
                 <a
                   href={link.href}
-                  className="relative text-sm text-mint transition-colors duration-150 ease-out hover:text-arctic after:absolute after:-bottom-1 after:left-0 after:h-px after:w-0 after:bg-nocturnal after:transition-all after:duration-150 after:ease-out hover:after:w-full"
+                  className="relative text-sm text-arctic no-underline transition-colors duration-150 ease-out hover:text-nocturnal after:absolute after:-bottom-1 after:left-0 after:h-px after:w-0 after:bg-nocturnal after:transition-all after:duration-150 after:ease-out hover:after:w-full"
                 >
                   {link.label}
                 </a>
               </li>
             ))}
             <li>
-              <a
+              <MagneticButton
                 href="#pricing"
-                className="rounded-md bg-nocturnal px-4 py-2 text-sm font-medium text-oceanic transition-colors duration-150 ease-out hover:bg-saffron"
+                className="rounded-md bg-nocturnal px-4 py-2 text-sm font-medium text-oceanic no-underline transition-colors duration-150 ease-out hover:bg-saffron"
               >
                 Get Started
-              </a>
+              </MagneticButton>
             </li>
           </ul>
         </nav>

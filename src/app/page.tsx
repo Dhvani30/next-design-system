@@ -4,10 +4,12 @@ import { SiteHeader } from "@/components/layout/SiteHeader";
 import { PricingSection } from "@/components/pricing/PricingSection";
 import { SecuritySection } from "@/components/security/SecuritySection";
 import { SocialProofSection } from "@/components/social-proof/SocialProofSection";
+import { CustomCursor } from "@/components/cursor/CustomCursor";
 
 export default function Home() {
   return (
     <>
+      <CustomCursor />
       <SiteHeader />
 
       <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col gap-16 px-6 pb-16 pt-28">

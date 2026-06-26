@@ -1,5 +1,7 @@
 import Image from "next/image";
-import { Hero3DLazy } from "./Hero3DLazy";
+import { Hero3DBackground } from "./Hero3DBackground";
+import { MagneticButton } from "@/components/magnetic/MagneticButton";
+import { ScrollReveal } from "@/components/scroll/ScrollReveal";
 
 export function HeroSection() {
   return (
@@ -8,28 +10,32 @@ export function HeroSection() {
       aria-labelledby="hero-heading"
       className="relative isolate grid items-center gap-10 lg:grid-cols-2 lg:gap-16 hero-grid-pattern"
     >
-      <Hero3DLazy />
+      <Hero3DBackground />
 
       <div className="hero-fade-in relative z-10">
         <h1 id="hero-heading" className="hero-headline text-arctic text-shadow-glow">
           Automate Your Data Pipeline
         </h1>
-        <p className="mt-6 max-w-lg font-sans text-lg text-mint">
-          Seamlessly integrate, process, and validate data with zero manual
-          intervention.
-        </p>
-        <a
-          href="#pricing"
-          className="hero-cta mt-8 inline-flex items-center gap-2 rounded-lg bg-nocturnal px-8 py-4 text-sm font-medium text-oceanic transition-all duration-150 ease-out hover:scale-105 hover:shadow-[0_0_30px_rgba(255,200,1,0.5)]"
-        >
-          Get Started Free
-          <img
-            src="/icons/arrow-trending-up.svg"
-            alt=""
-            className="size-4"
-            aria-hidden="true"
-          />
-        </a>
+        <ScrollReveal delay={100}>
+          <p className="mt-6 max-w-lg font-sans text-lg text-mint">
+            Seamlessly integrate, process, and validate data with zero manual
+            intervention.
+          </p>
+        </ScrollReveal>
+        <ScrollReveal delay={200}>
+          <MagneticButton
+            href="#pricing"
+            className="hero-cta mt-8 inline-flex items-center gap-2 rounded-lg bg-nocturnal px-8 py-4 text-sm font-medium text-oceanic transition-all duration-150 ease-out hover:scale-105 hover:shadow-[0_0_30px_rgba(255,200,1,0.5)]"
+          >
+            Get Started Free
+            <img
+              src="/icons/arrow-trending-up.svg"
+              alt=""
+              className="size-4"
+              aria-hidden="true"
+            />
+          </MagneticButton>
+        </ScrollReveal>
       </div>
 
       <figure className="hero-fade-in hero-fade-in-delay relative z-10">

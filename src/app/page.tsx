@@ -1,3 +1,6 @@
+import { PricingSection } from "@/components/pricing/PricingSection";
+import { FeaturesSection } from "@/components/features/FeaturesSection";
+
 export default function Home() {
   return (
     <div className="flex flex-1 flex-col">
@@ -9,7 +12,7 @@ export default function Home() {
         </nav>
       </header>
 
-      <main className="mx-auto flex w-full max-w-4xl flex-1 flex-col gap-16 px-6 py-16">
+      <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col gap-16 px-6 py-16">
         <section aria-labelledby="hero-heading">
           <p className="mb-4 text-sm text-saffron">Oceanic Noir · Dark Default</p>
           <h1 id="hero-heading" className="hero-headline">
@@ -21,16 +24,9 @@ export default function Home() {
           </p>
         </section>
 
-        <section aria-labelledby="pricing-heading">
-          <h2 id="pricing-heading">Pricing</h2>
-          <article className="mt-6 rounded-lg border border-expedition bg-expedition/20 p-8">
-            <h3>Pro</h3>
-            <p className="pricing-number mt-2">$29</p>
-            <p className="mt-2">
-              per month · billed <time dateTime="P1M">monthly</time>
-            </p>
-          </article>
-        </section>
+        <PricingSection />
+
+        <FeaturesSection />
 
         <section aria-labelledby="typography-heading">
           <h2 id="typography-heading">Typography</h2>

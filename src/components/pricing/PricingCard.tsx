@@ -26,18 +26,25 @@ function PricingCardComponent({ tier }: PricingCardProps) {
 
   return (
     <article
-      className={`flex flex-col rounded-lg border bg-expedition p-8 transition-colors duration-150 ease-out ${
+      className={`relative flex flex-col rounded-lg border bg-expedition p-8 transition-all duration-200 ease-out hover:-translate-y-2 ${
         isPro
           ? "border-nocturnal ring-1 ring-nocturnal/50"
           : "border-expedition hover:border-mint/40"
       }`}
     >
+      {isPro && (
+        <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+          <span className="inline-flex items-center rounded-full bg-nocturnal px-4 py-1 text-xs font-semibold uppercase tracking-wider text-oceanic shadow-lg">
+            Most Popular
+          </span>
+        </div>
+      )}
       <header className="flex items-start justify-between gap-3">
         <h3>{label}</h3>
-        {showBadge ? (
+        {showBadge && !isPro ? (
           <span className="inline-flex shrink-0 items-center gap-1 rounded-full border border-saffron/40 bg-saffron/10 px-2.5 py-1 text-xs font-medium uppercase tracking-wide text-saffron">
             <ArrowTrendingUpIcon className="size-3.5" />
-            {isPro ? "Popular" : "Scale"}
+            Scale
           </span>
         ) : null}
       </header>

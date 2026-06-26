@@ -6,8 +6,14 @@ export function SiteHeader() {
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <a
           href="#hero"
-          className="font-mono text-lg font-semibold tracking-tight text-arctic transition-colors duration-150 ease-out hover:text-nocturnal"
+          className="flex items-center gap-2 font-mono text-lg font-semibold tracking-tight text-arctic transition-colors duration-150 ease-out hover:text-nocturnal"
         >
+          <img
+            src="/icons/cube-16-solid.svg"
+            alt=""
+            className="size-5"
+            aria-hidden="true"
+          />
           {BRAND_NAME}
         </a>
 
@@ -17,12 +23,20 @@ export function SiteHeader() {
               <li key={link.href}>
                 <a
                   href={link.href}
-                  className="text-sm text-mint transition-colors duration-150 ease-out hover:text-arctic"
+                  className="relative text-sm text-mint transition-colors duration-150 ease-out hover:text-arctic after:absolute after:-bottom-1 after:left-0 after:h-px after:w-0 after:bg-nocturnal after:transition-all after:duration-150 after:ease-out hover:after:w-full"
                 >
                   {link.label}
                 </a>
               </li>
             ))}
+            <li>
+              <a
+                href="#pricing"
+                className="rounded-md bg-nocturnal px-4 py-2 text-sm font-medium text-oceanic transition-colors duration-150 ease-out hover:bg-saffron"
+              >
+                Get Started
+              </a>
+            </li>
           </ul>
         </nav>
       </div>

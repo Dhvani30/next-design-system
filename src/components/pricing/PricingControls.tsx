@@ -55,10 +55,15 @@ function PricingControlsComponent({
       </div>
 
       <div
-        className="inline-flex rounded-full border border-expedition p-1"
+        className="relative inline-flex rounded-full border border-expedition p-1"
         role="group"
         aria-label="Billing cycle"
       >
+        <div
+          className={`absolute top-1 bottom-1 w-[calc(50%-4px)] rounded-full bg-nocturnal transition-all duration-300 ease-out ${
+            billingCycle === "monthly" ? "left-1" : "left-[calc(50%+2px)]"
+          }`}
+        />
         {BILLING_CYCLES.map((cycle) => {
           const isActive = billingCycle === cycle;
           const label = cycle === "monthly" ? "Monthly" : "Annual";
@@ -71,10 +76,8 @@ function PricingControlsComponent({
               type="button"
               aria-pressed={isActive}
               onClick={onClick}
-              className={`rounded-full px-4 py-2 text-sm transition-colors duration-150 ease-out ${
-                isActive
-                  ? "bg-nocturnal text-oceanic"
-                  : "text-mint hover:text-foreground"
+              className={`relative z-10 rounded-full px-4 py-2 text-sm font-medium transition-colors duration-300 ease-out ${
+                isActive ? "text-oceanic" : "text-mint hover:text-foreground"
               }`}
             >
               {label}

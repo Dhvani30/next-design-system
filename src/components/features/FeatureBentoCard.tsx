@@ -44,7 +44,7 @@ function FeatureCardVisual({
       <div className="relative hidden shrink-0 md:block md:h-36 md:w-48 lg:h-40 lg:w-56">
         <Image
           src={feature.image}
-          alt=""
+          alt={`Screenshot showing ${feature.title} feature interface`}
           fill
           sizes="(min-width: 1024px) 224px, 192px"
           className="rounded-lg object-cover opacity-80 shadow-[0_12px_32px_rgba(0,0,0,0.25)]"
@@ -57,7 +57,7 @@ function FeatureCardVisual({
     <div className="pointer-events-none absolute -bottom-2 -right-2 h-28 w-28 opacity-50 md:h-32 md:w-32">
       <Image
         src={feature.image}
-        alt=""
+        alt={`Preview of ${feature.title} feature`}
         fill
         sizes="128px"
         className="rounded-lg object-cover"
@@ -142,7 +142,7 @@ function FeatureBentoCardComponent({
             <div className="relative mt-4 h-28 w-full overflow-hidden rounded-lg">
               <Image
                 src={feature.image}
-                alt=""
+                alt={`Detailed view of ${feature.title} feature`}
                 fill
                 sizes="100vw"
                 className="object-cover opacity-70"
